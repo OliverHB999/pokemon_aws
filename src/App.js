@@ -53,9 +53,13 @@ function App() {
       .finally(() => setloading3(false));
   };
 
+
   return (
     <div className="App">
-      <h2> {">>THIS IS A DEMO<<"} This react app i pure frontend. It sends requests to aws Lambda function (REST API) </h2>
+      <h2>
+        {">>THIS IS A DEMO<<"} This react app i pure frontend. It sends requests
+        to aws Lambda function (REST API)
+      </h2>
       <header className="App-header">
         <div className="search_div">
           <h3>search for a pokemon</h3>
@@ -69,7 +73,7 @@ function App() {
             search
           </button>
           <ClipLoader loading={loading} color="green"></ClipLoader>
-          {searchPoke > 0  ? (
+          {searchPoke ? (
             <div className="search_result">
               <h5 style={{ margin: 0 }}>{searchPoke.Name}</h5>
               <h6>type: {searchPoke.Type}</h6>{" "}
@@ -78,8 +82,10 @@ function App() {
                 return <p key={ele}>{ele}</p>;
               })}
             </div>
+          ) : searchPoke === "not found" ? (
+            <p>no pokemon found</p>
           ) : (
-            searchPoke === "not found" ? <p>no pokemon found</p> : ""
+            ""
           )}
         </div>
 
