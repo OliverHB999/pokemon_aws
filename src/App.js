@@ -15,13 +15,13 @@ function App() {
     setloading(true);
 
     const name = document.querySelector("#search_in").value;
-    let url2 = `https://kntqz3vgpivqtc4iekiykp7lee0bmruu.lambda-url.eu-west-1.on.aws/api/pokemon/${name}`;
+    let url2 = `https://npv7qe5buit4nsuqmn7grenkhq0dmgie.lambda-url.eu-west-1.on.aws/api/pokemon/${name}`;
 
     fetch(url2, {
       method: "GET",
     })
       .then((res) => res.json())
-      .then((res) => setsearchPoke(res))
+      .then((res) => {setsearchPoke(res); console.log(res)})
       .finally(() => setloading(false));
   };
 
@@ -29,7 +29,7 @@ function App() {
     setloading2(true);
 
     const name = document.querySelector("#add_in").value;
-    let url2 = `https://kntqz3vgpivqtc4iekiykp7lee0bmruu.lambda-url.eu-west-1.on.aws/api/pokemon/postToS3/${name}/pokemons-223311`;
+    let url2 = `https://npv7qe5buit4nsuqmn7grenkhq0dmgie.lambda-url.eu-west-1.on.aws/api/pokemon/postToS3/${name}/pokemons-223311`;
 
     fetch(url2, {
       method: "POST",
@@ -43,7 +43,7 @@ function App() {
   const loadAction = () => {
     setloading3(true);
 
-    let url2 = `https://kntqz3vgpivqtc4iekiykp7lee0bmruu.lambda-url.eu-west-1.on.aws/api/pokemon/AllPokemons`;
+    let url2 = `https://npv7qe5buit4nsuqmn7grenkhq0dmgie.lambda-url.eu-west-1.on.aws/api/pokemon/AllPokemons`;
 
     fetch(url2, {
       method: "GET",
@@ -76,7 +76,8 @@ function App() {
           {searchPoke ? (
             <div className="search_result">
               <h5 style={{ margin: 0 }}>{searchPoke.Name}</h5>
-              <h6>type: {searchPoke.Type}</h6>{" "}
+              <img src={searchPoke.ImgURL} />
+              <h6 style={{margin:0}}>type: {searchPoke.Type}</h6>{" "}
               <p style={{ fontWeight: 700 }}>Abilities:</p>
               {searchPoke.Abilities.map((ele) => {
                 return <p key={ele}>{ele}</p>;
